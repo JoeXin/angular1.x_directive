@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="angular.js"></script>
+    </head>
+    <style>
+    	.gpmenu{
+    		border:1px solid black;
+    		width:250px;
+    		height: 20px;
+    	}
+    	.gpmenu>.title{
+    		background-color: black;
+    		color:white;
+    		padding:.1em .3em;
+    		cursor: pointer;
+    	}
+    	.gpmenu>.body{
+    		padding: .1em .3em;
+    	}
+    </style>
+    <body>
+    <div ng-controller="myCtrl">
+    	<gpmenu class="gpmenu" gpmenu-title="title">
+    		{{text}}
+    	</gpmenu>
+    </div>
+    <script>
+    	var app=angular.module('Myapp', []);
+    	app.controller('myCtrl', ['$scope', function ($scope) {
+    		$scope.title="点击展开";
+    		$scope.text="内容";
+    	}])
+    	app.directive('gpmenu', [function () {
+    		return {
+    			restrict: 'EA',
+    			replace:true,
+    			transclude:true,
+    			scope:{
+    				title:"=gpmenuTitle"
+    			},
+    			template:'<div>'
+    			+'<div class="title" ng-click="toggle()">{{title}}</div>'
+    			+'<div class="body" ng-show="showMe" ng-transclude></div>'
+    			+'</div>',
+    			link: function (scope, element, attrs) {
+    				scope.showMe=false;
+    				scope.toggle=function toggle(){
+    					scope.showMe=!scope.showMe;	
+    				}
+    			}
+    		};
+    	}])
+    	
+    </script>
+    </body>
+</html>

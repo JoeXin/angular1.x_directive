@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <script src="angular.js"></script>
+    </head>
+    <body ng-app="Myapp">
+    <div ng-controller="myCtrl"> 
+    	 <input type="text" ng-model="name" placeholder="Enter name"/>
+    <br />
+    {{ name }}
+    <hello-world say="say()" name="{{name}}"></hello-world>
+    </div>
+	<script>
+		var app=angular.module('Myapp',[]);
+    	app.controller('myCtrl', ['$scope', function ($scope) {
+    		// $scope.name="child";
+    		 $scope.name = "yangbo";
+    $scope.say = function() {
+        alert('hello!');
+    }
+    	}])
+    	app.directive('helloWorld', [function () {
+    		return {
+    			restrict: 'EA',
+    			scope:{
+    				name:'@',
+    				say:'&'
+    			},
+    			replace:true,
+    			template:'<button type="button" ng-bind="name" ng-init="say()"></button>',
+    			link: function (scope, iElement, iAttrs) {
+    				
+    			}
+    		};
+    	}])
+	</script>
+    </body>
+</html>

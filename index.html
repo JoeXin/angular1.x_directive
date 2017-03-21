@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="angular.js"></script>
+    </head>
+    <body>
+    	<!-- <hello>
+            <br/>
+            <span>原始的内容，</span><br/>
+            <span>还会在这里。</span>
+        </hello>
+        <hello>
+        </hello> -->
+	<div ng-controller="MyCtrl">
+		<div ng-repeat="item in items">
+			{{item}}.<hello></hello>
+		</div>
+	</div>
+
+    </body>
+    <script>
+    /**
+     * Element 元素   Attribute  属性  Class  样式  M  注释
+     * replace 替换
+     * @type {[type]}
+     */
+    	var app=angular.module('Myapp',[]);
+    	app.controller('MyCtrl', ['$scope', function ($scope) {
+    		$scope.items=[1,2,3,4,5,6];
+    	}])
+    	app.directive('hello', function () {
+    		return {
+    			restrict: 'E',
+    			template:"<span>Hi there</span>",
+    			replace:true,
+    			link: function (scope, iElement, iAttrs) {
+    			}
+    		};
+    	})
+    	
+    </script>
+</html>

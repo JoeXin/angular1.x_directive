@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+          <script src="angular.js"></script>
+    </head>
+    <body>
+    <div ng-app="Myapp" ng-init="name='parent'">
+    	parentNode：{{name}}
+    	<div ng-controller="myCtrl">
+    		childNode：{{name}}
+    	</div>
+    </div>
+    </body>
+    <script>
+    	var app=angular.module('Myapp',[]);
+    	app.controller('myCtrl', ['$scope', function ($scope) {
+    		// $scope.name="child";
+    	}])
+    </script>
+</html>
